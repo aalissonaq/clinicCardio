@@ -28,7 +28,15 @@
     </form> -->
 
     <!-- Right navbar links -->
-    <!-- <ul class="navbar-nav ml-auto"> -->
+    <ul class="navbar-nav ml-auto">
+      <li>
+        <div class="info">
+          <a href="?acao=sair" class="d-block text-danger" title="Sair do Sistema">
+              <i class="fa fa-2x fa-fw mdi mdi-power"></i>
+              <!-- <i class="fa fa-power-off" aria-hidden="true"></i> -->
+          </a>
+      </div>
+      </li>
     <!-- Messages Dropdown Menu -->
     <!-- <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
@@ -118,5 +126,5 @@
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
                     class="fas fa-th-large"></i></a>
         </li> -->
-    <!-- </ul> -->
+    </ul>
 </nav>

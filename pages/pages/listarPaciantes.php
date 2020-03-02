@@ -111,9 +111,9 @@
                                           
                                           <li class=\"nav-item\">
                                                 <a href=\"?page=edtPasswdUsuario&idEdit={$dados['idPassoaPessoa']}\" class=\"btn btn-tool\" target=\"\" 
-                                                title=\"Solicitar Exame\" rel=\"noopener noreferrer\">
+                                                title=\"Marcas Consulta\" rel=\"noopener noreferrer\">
                                                   <!-- <i class=\"fas fa-key fa-lg\"></i> -->
-                                                  <i class=\"mdi mdi-flask-plus-outline fa fa-2x\"></i>
+                                                  <i class=\"mdi mdi-calendar-plus fa fa-2x\"></i>
                                                 </a>
                                               </li>
                                           

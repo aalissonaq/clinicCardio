@@ -50,7 +50,7 @@ if (!isset($_SESSION['USUARIO'])) {
         <!-- summernote -->
         <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css" />
 
-        <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="node_modules/@mdi/font/css/materialdesignicons.min.css">
         <!-- <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.5.95/css/materialdesignicons.min.css"> -->
 

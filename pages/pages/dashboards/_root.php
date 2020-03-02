@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark text-uppercase">Painel Incial</h1>
+                <h1 class="m-0 text-dark text-uppercase">Painel</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -27,7 +27,7 @@
                             <i class="fas fa-hospital-alt fa-fw fa-lg"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Parceiros Cadastrados</span>
+                            <span class="info-box-text">Parceiros</span>
                             <span class="info-box-number">
                               <?php
                               $userSystem = ler('paciente'  , '', "");
@@ -49,7 +49,7 @@
                             <i class="fas fa-user-injured fa-fw fa-lg"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Pacientes Cadastrados</span>
+                            <span class="info-box-text">Pacientes</span>
                             <span class="info-box-number">
                               <?php
                               $userSystem = ler('paciente'  , '', "");
@@ -71,14 +71,14 @@
                 <a href="?page=listarExamesGest">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-danger elevation-1">
-                            <i class="fas fa-vial fa-fw fa-lg"></i></span>
+                            <i class="fa fa-fw fa-lg mdi mdi-stethoscope"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Exames Cadastrado </span>
+                            <span class="info-box-text">Serviços </span>
                             <span class="info-box-number">
                               <?php
                               $userSystem = ler('exemesac', '', "");
-                              echo $userSystem->rowCount();
+                             // echo $userSystem->rowCount();
                               ?>
 
                             </span>
@@ -98,9 +98,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">
-
-                                Usuários Ativos
-
+                                Usuários 
                             </span>
                             <span class="info-box-number">
                                 <?php
