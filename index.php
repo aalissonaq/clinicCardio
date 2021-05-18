@@ -78,7 +78,6 @@
 
         .links>a:hover {
             color: #7a1634;
-
         }
 
         .m-b-md {
@@ -122,7 +121,6 @@
                     <span>Pré marcação de Consulta</span>
                 </a> -->
               </div>
-
         </div>
     </div>
     <script src="https://kit.fontawesome.com/beb068f19c.js"></script>

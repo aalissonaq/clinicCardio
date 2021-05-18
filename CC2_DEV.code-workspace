@@ -4,5 +4,28 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"sqltools.connections": [
+			{
+				"database": "cc3",
+				"dialect": "MySQL",
+				"isActive": false,
+				"isConnected": false,
+				"name": "LOCAL",
+				"password": "T5r4e3w2q1!",
+				"port": 3306,
+				"server": "localhost",
+				"username": "admin"
+			},
+			{
+				"database": "postgres",
+				"dialect": "PostgreSQL",
+				"name": "psql-local",
+				"password": "t5r4e3w2q1",
+				"port": 5432,
+				"server": "localhost",
+				"username": "postgres"
+			}
+		]
+	}
 }
