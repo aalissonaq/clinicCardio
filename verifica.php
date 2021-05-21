@@ -10,26 +10,26 @@ $login['senha'] = strip_tags(trim(md5($_POST['senha'])));
 
 $lerPessoa = ler("pessoa", "", "WHERE docPessoa = '{$login['usuario']}'");
 if ($lerPessoa->rowCount() != 0) {
-    $listaPessoa = $lerPessoa->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($listaPessoa as $dadosP) {
+  $listaPessoa = $lerPessoa->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($listaPessoa as $dadosP) {
 
-        $_SESSION['ID'] = $dadosP['idPessoa'];
-        $_SESSION['USUARIO'] = $dadosP['nmPessoa'];
-        $_SESSION['CPFCNPJ'] = $dadosP['docPessoa'];
+    $_SESSION['ID'] = $dadosP['idPessoa'];
+    $_SESSION['USUARIO'] = $dadosP['nmPessoa'];
+    $_SESSION['CPFCNPJ'] = $dadosP['docPessoa'];
 
-        $lerUser = ler("users", '', "WHERE idPessoa = '{$dadosP['idPessoa']}'
+    $lerUser = ler("users", '', "WHERE idPessoa = '{$dadosP['idPessoa']}'
           AND passUser ='{$login['senha']}' AND flStatusUser = '1' ");
-        $contaUser = $lerUser->rowCount();
-        $very = $lerUser->fetchAll(PDO::FETCH_ASSOC);
-        if ($contaUser == 1) {
-            foreach ($very as $dadosUser) {
-                $_SESSION['ID'] = $dadosUser['id'];
-                $_SESSION['STATUS'] = $dadosUser['flStatusUser'];
-                $_SESSION['NIVEL'] = $dadosUser['nivelUser'];
-                header("Location: inicio.php");
-            }
-        } else {
-            header("Location: login.php");
-        }
+    $contaUser = $lerUser->rowCount();
+    $very = $lerUser->fetchAll(PDO::FETCH_ASSOC);
+    if ($contaUser == 1) {
+      foreach ($very as $dadosUser) {
+        $_SESSION['ID'] = $dadosUser['id'];
+        $_SESSION['STATUS'] = $dadosUser['flStatusUser'];
+        $_SESSION['NIVEL'] = $dadosUser['nivelUser'];
+        header("Location: inicio.php");
+      }
+    } else {
+      header("Location: login.php");
     }
+  }
 }
