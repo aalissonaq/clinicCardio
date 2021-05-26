@@ -26,16 +26,16 @@
     <hr color="#004455" class="container-fluid" />
   </div>
   <?php
-    $idEdit = $_GET['id'];
-    $dadosPessoa = ler("vw_pessoa_paciente", '', "WHERE idPassoaPessoa = '{$idEdit}'")->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($dadosPessoa as $dpaciente) {
-        ?>
-        
+  $idEdit = $_GET['id'];
+  $dadosPessoa = ler("vw_pessoa_paciente", '', "WHERE idPassoaPessoa = '{$idEdit}'")->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($dadosPessoa as $dpaciente) {
+  ?>
+
 
   <!-- Default box -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Dados do Paciente:
+      <h3 class="card-title">Dados do Paciente:&nbsp
         <small class="lead text-primary text-uppercase"><?= $dpaciente['nmPessoa']; ?></small>
       </h3>
 
@@ -43,22 +43,29 @@
         <a href="?page=listarPaciantes" class="btn btn-tool text-primary d-print-none">
           <!-- <i class="far fa-arrow-alt-circle-left fa-fw fa-lg"></i> -->
           <i class="mdi mdi-arrow-left-bold-circle-outline fa fa-2x align-middle "></i>
-          Voltar para Lista de Pacientes</a>
+          Voltar para Lista de Pacientes
+        </a>
       </div>
     </div>
     <div class="card-body">
 
       <input type="hidden" name="idEdit" value="<?= $_GET['idEdit']; ?>">
       <div class="form-row">
-        <div class="col-md-9 mb-3 ">
+        <div class="col-md-7 mb-3 ">
           <label for="nmPessoa">Nome do Paciente</label>
           <br />
           <span class="lead"><?= $dpaciente['nmPessoa']; ?></span>
         </div>
+
         <div class="col-md-3 mb-3">
           <label for="docPessoa">CPF</label>
           <br />
-          <span class="lead"><?= $dpaciente['docPessoa']; ?></span>
+          <span class="lead"><?= MascaraCPF($dpaciente['docPessoa']); ?></span>
+        </div>
+        <div class="col-md-2 mb-3 ">
+          <label for="nmPessoa">Idade</label>
+          <br />
+          <span class="lead"><?= str_pad(calcIdade($dpaciente['dtNascPessoa']), 2, "0", STR_PAD_LEFT); ?></span>
         </div>
       </div>
       <div class="form-row">
@@ -71,19 +78,19 @@
         <div class="col-md-2 mb-3">
           <label for="sexoPaciente">Sexo</label>
           <br />
-          <span class="lead text-uppercase"><?=$dpaciente['sexoPaciente']?></span>
+          <span class="lead text-uppercase"><?= $dpaciente['sexoPaciente'] ?></span>
         </div>
 
         <div class="col-md-2 mb-3">
           <label for="strEstadoCivilPaciente">Estado Civil</label>
           <br />
-          <span class="lead text-uppercase"><?=$dpaciente['strEstadoCivilPaciente']?></span>
+          <span class="lead text-uppercase"><?= $dpaciente['strEstadoCivilPaciente'] ?></span>
         </div>
 
         <div class=" col-md-4 mb-3">
           <label for="strNaturalidadePaciente">Naturalidade</label>
           <br />
-          <span class="lead text-uppercase"><?=$dpaciente['strNaturalidadePaciente'];?></span>
+          <span class="lead text-uppercase"><?= $dpaciente['strNaturalidadePaciente']; ?></span>
         </div>
 
         <div class="col-md-2 mb-3">
@@ -205,105 +212,104 @@
   <!-- /.card -->
   <br />
   <?php }
-    ?>
+  ?>
 </section>
 <!-- /.content -->
 <script>
-  document.getElementById('gestaoMenu').classList.add("menu-open");
-  document.getElementById('gestaoMenuActive').classList.add("active");
-  document.getElementById('userSystem').classList.add("active");
+document.getElementById('gestaoMenu').classList.add("menu-open");
+document.getElementById('gestaoMenuActive').classList.add("active");
+document.getElementById('userSystem').classList.add("active");
 
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-  (function () {
-    'use strict';
-    window.addEventListener('load', function () {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function (form) {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 
-  // Adicionando Javascript
-  function limpa_formulário_cep() {
-    //Limpa valores do formulário de cep.
-    document.getElementById("logradouro").value = "";
-    document.getElementById("bairro").value = "";
-    document.getElementById("cidade").value = "";
-    document.getElementById("estado").value = "";
-    // document.getElementById("ibge").value = "";
+// Adicionando Javascript
+function limpa_formulário_cep() {
+  //Limpa valores do formulário de cep.
+  document.getElementById("logradouro").value = "";
+  document.getElementById("bairro").value = "";
+  document.getElementById("cidade").value = "";
+  document.getElementById("estado").value = "";
+  // document.getElementById("ibge").value = "";
+}
+
+function meu_callback(conteudo) {
+  if (!("erro" in conteudo)) {
+    //Atualiza os campos com os valores.
+    document.getElementById("logradouro").value =
+      conteudo.logradouro;
+    document.getElementById("bairro").value =
+      conteudo.bairro;
+    document.getElementById("cidade").value =
+      conteudo.localidade;
+    document.getElementById("estado").value =
+      conteudo.uf;
+    //document.getElementById("ibge").value =
+    //conteudo.ibge;
+  } //end if.
+  else {
+    //CEP não Encontrado.
+    limpa_formulário_cep();
+    alert("CEP não encontrado.");
   }
+}
 
-  function meu_callback(conteudo) {
-    if (!("erro" in conteudo)) {
-      //Atualiza os campos com os valores.
+function pesquisacep(valor) {
+  //Nova variável "cep" somente com dígitos.
+  var cep = valor.replace(/\D/g, "");
+
+  //Verifica se campo cep possui valor informado.
+  if (cep != "") {
+    //Expressão regular para validar o CEP.
+    var validacep = /^[0-9]{8}$/;
+
+    //Valida o formato do CEP.
+    if (validacep.test(cep)) {
+      //Preenche os campos com "..." enquanto consulta webservice.
       document.getElementById("logradouro").value =
-        conteudo.logradouro;
-      document.getElementById("bairro").value =
-        conteudo.bairro;
-      document.getElementById("cidade").value =
-        conteudo.localidade;
-      document.getElementById("estado").value =
-        conteudo.uf;
-      //document.getElementById("ibge").value =
-      //conteudo.ibge;
+        "...";
+      document.getElementById("bairro").value = "...";
+      document.getElementById("cidade").value = "...";
+      document.getElementById("estado").value = "...";
+      //document.getElementById("ibge").value = "...";
+
+      //Cria um elemento javascript.
+      var script = document.createElement("script");
+
+      //Sincroniza com o callback.
+      script.src =
+        "https://viacep.com.br/ws/" +
+        cep +
+        "/json/?callback=meu_callback";
+
+      //Insere script no documento e carrega o conteúdo.
+      document.body.appendChild(script);
     } //end if.
     else {
-      //CEP não Encontrado.
+      //cep é inválido.
       limpa_formulário_cep();
-      alert("CEP não encontrado.");
+      alert("Formato de CEP inválido.");
     }
+  } //end if.
+  else {
+    //cep sem valor, limpa formulário.
+    limpa_formulário_cep();
   }
-
-  function pesquisacep(valor) {
-    //Nova variável "cep" somente com dígitos.
-    var cep = valor.replace(/\D/g, "");
-
-    //Verifica se campo cep possui valor informado.
-    if (cep != "") {
-      //Expressão regular para validar o CEP.
-      var validacep = /^[0-9]{8}$/;
-
-      //Valida o formato do CEP.
-      if (validacep.test(cep)) {
-        //Preenche os campos com "..." enquanto consulta webservice.
-        document.getElementById("logradouro").value =
-          "...";
-        document.getElementById("bairro").value = "...";
-        document.getElementById("cidade").value = "...";
-        document.getElementById("estado").value = "...";
-        //document.getElementById("ibge").value = "...";
-
-        //Cria um elemento javascript.
-        var script = document.createElement("script");
-
-        //Sincroniza com o callback.
-        script.src =
-          "https://viacep.com.br/ws/" +
-          cep +
-          "/json/?callback=meu_callback";
-
-        //Insere script no documento e carrega o conteúdo.
-        document.body.appendChild(script);
-      } //end if.
-      else {
-        //cep é inválido.
-        limpa_formulário_cep();
-        alert("Formato de CEP inválido.");
-      }
-    } //end if.
-    else {
-      //cep sem valor, limpa formulário.
-      limpa_formulário_cep();
-    }
-  }
-
+}
 </script>

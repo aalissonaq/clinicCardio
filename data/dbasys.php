@@ -2,17 +2,17 @@
 
 function connect()
 {
-    static $con = null;
-    try {
-        if ($con == null) {
-            $con = new PDO('mysql:host=localhost;dbname=cc', 'root', 'root');
-        }
-    } catch (PDOException $e) {
-        echo "Erro encontrado" . $e->getMessage() . "com codigo" . $e->getCode();
-        die;
+  static $con = null;
+  try {
+    if ($con == null) {
+      $con = new PDO('mysql:host=localhost;dbname=cc', 'root', 'root');
     }
-    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $con;
+  } catch (PDOException $e) {
+    echo "Erro encontrado" . $e->getMessage() . "com codigo" . $e->getCode();
+    die;
+  }
+  $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  return $con;
 }
 
 /*****************************
@@ -21,12 +21,12 @@ function connect()
 
 function ler($tabela, $cond1 = null, $where = null)
 {
-    $cond1 = ($cond1 != null ? $cond1 : '*');
-    $where = ($where != null ? $where : '');
-    $pdo = connect();
-    $lendo = connect()->prepare("SELECT {$cond1} FROM {$tabela} {$where}");
-    $lendo->execute();
-    return $lendo;
+  $cond1 = ($cond1 != null ? $cond1 : '*');
+  $where = ($where != null ? $where : '');
+  $pdo = connect();
+  $lendo = connect()->prepare("SELECT {$cond1} FROM {$tabela} {$where}");
+  $lendo->execute();
+  return $lendo;
 }
 
 /*****************************
@@ -35,22 +35,22 @@ function ler($tabela, $cond1 = null, $where = null)
 
 function inseir($tabela, array $dados)
 {
-    $campos = implode(', ', array_keys($dados));
-    $valores = "'" . implode("', '", array_values($dados)) . "'";
-    $insert = connect()->prepare("INSERT INTO {$tabela}($campos) VALUES ($valores)");
-    $insert->execute();
-    if ($insert->rowCount()) {
-        return true;
-    }
+  $campos = implode(', ', array_keys($dados));
+  $valores = "'" . implode("', '", array_values($dados)) . "'";
+  $insert = connect()->prepare("INSERT INTO {$tabela}($campos) VALUES ($valores)");
+  $insert->execute();
+  if ($insert->rowCount()) {
+    return true;
+  }
 }
 
 function inseirPadrao($tabela, $campos, $valores)
 {
-    $qrInserir = "INSERT INTO {$tabela} ({$campos}) VALUES ({$valores})";
-    $exInserir = mysql_query($qrInserir) or die('Erro ao Cadastrar em ' . $tabela . ' ' . mysql_error());
-    if ($exInserir) {
-        return true;
-    }
+  $qrInserir = "INSERT INTO {$tabela} ({$campos}) VALUES ({$valores})";
+  $exInserir = mysql_query($qrInserir) or die('Erro ao Cadastrar em ' . $tabela . ' ' . mysql_error());
+  if ($exInserir) {
+    return true;
+  }
 }
 
 /*****************************
@@ -59,15 +59,15 @@ function inseirPadrao($tabela, $campos, $valores)
 
 function atualizar($tabela, array $dados, $cond)
 {
-    foreach ($dados as $filds => $values) {
-        $campos[] = $filds . "= '" . $values . "'";
-    }
-    $campos = implode(", ", $campos);
-    $update = connect()->prepare("UPDATE {$tabela} SET {$campos} WHERE {$cond}");
-    $update->execute();
-    if ($update->rowCount()) {
-        return true;
-    }
+  foreach ($dados as $filds => $values) {
+    $campos[] = $filds . "= '" . $values . "'";
+  }
+  $campos = implode(", ", $campos);
+  $update = connect()->prepare("UPDATE {$tabela} SET {$campos} WHERE {$cond}");
+  $update->execute();
+  if ($update->rowCount()) {
+    return true;
+  }
 }
 
 /*****************************
@@ -76,33 +76,33 @@ function atualizar($tabela, array $dados, $cond)
 
 function deletar($tabela, $cond)
 {
-    $Del = connect()->prepare("DELETE FROM {$tabela} WHERE {$cond}");
-    $Del->execute();
-    if ($Del->rowCount()) {
-        return true;
-    }
+  $Del = connect()->prepare("DELETE FROM {$tabela} WHERE {$cond}");
+  $Del->execute();
+  if ($Del->rowCount()) {
+    return true;
+  }
 }
 
 function get_enum($table_name, $field_name)
 {
-    $sql = "desc {$table_name} {$field_name}";
-    $st = $this->db->prepare($sql);
+  $sql = "desc {$table_name} {$field_name}";
+  $st = $this->db->prepare($sql);
 
-    if ($st->execute()) {
-        $row = $st->fetch();
-        if ($row === FALSE)
-            return FALSE;
+  if ($st->execute()) {
+    $row = $st->fetch();
+    if ($row === FALSE)
+      return FALSE;
 
-        $type_dec = $row->Type;
-        if (substr($type_dec, 0, 5) !== 'enum(')
-            return FALSE;
+    $type_dec = $row->Type;
+    if (substr($type_dec, 0, 5) !== 'enum(')
+      return FALSE;
 
-        $values = array();
-        foreach (explode(',', substr($type_dec, 5, (strlen($type_dec) - 6))) as $v) {
-            array_push($values, trim($v, "'"));
-        }
-
-        return $values;
+    $values = array();
+    foreach (explode(',', substr($type_dec, 5, (strlen($type_dec) - 6))) as $v) {
+      array_push($values, trim($v, "'"));
     }
-    return FALSE;
+
+    return $values;
+  }
+  return FALSE;
 }
