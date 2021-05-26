@@ -24,96 +24,41 @@
   <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+      <!-- <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon far fa-envelope"></i>
+                    <p>
+                        Mailbox
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="pages/mailbox/mailbox.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Inbox</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/mailbox/compose.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Compose</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="pages/mailbox/read-mail.html" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Read</p>
+                        </a>
+                    </li>
+                </ul>
+            </li> -->
 
 
-      <!-- ATENDIMENTO -->
-      <li class="nav-header text-uppercase">
-        <i class="fas fa-bell nav-icon fa-fw fa-lg text-yellow"> </i>
-        ATENDIMENTOS
-      </li>
-
-      <li class="nav-item " id="">
-        <a href="?page=listarPaciantes" class="nav-link" id="menuPacientes">
-          <i class="nav-icon fas fa-user-injured"></i>
-          <p>
-            Paciente
-            <!-- <span class="badge badge-info right">2</span> -->
-          </p>
-        </a>
-      </li>
-      <li class="nav-item " id="">
-        <a href="?page=listarPaciantes" class="nav-link" id="menuPacientes">
-          <i class="nav-icon mdi mdi-calendar-clock"></i>
-          <p>
-            Agenda
-            <!-- <span class="badge badge-info right">2</span> -->
-          </p>
-        </a>
-      </li>
-    </ul>
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-      <!-- FINANCEIRO -->
-      <li class="nav-header text-uppercase">
-        <i class="fas fa-dollar-sign nav-icon fa-fw fa-lg text-success"> </i>
-        FINANCEIRO
-      </li>
-      <!--Caixa-->
-      <li class="nav-item has-treeview " id="caixaMenu">
-        <a href="?page=listarSolicitante" class="nav-link" id="">
-          <i class="nav-icon fas fa-cash-register"></i>
-          <p>
-            Caixa
-            <i class="right fas fa-angle-left"></i>
-            <!-- <span class="badge badge-info right">2</span> -->
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="?page=listardispesas" class="nav-link" id="dispesaActiva">
-              <i class="nav-icon mdi mdi-cash-minus"></i>
-              <p>Dispesas | Saída</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="?page=" class="nav-link" id="profSolicitanteActiva">
-              <i class="nav-icon mdi mdi-cash-plus"></i>
-              <p>Receiras | Entrada</p>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-      <!--Configurações-->
-      <li class="nav-item has-treeview " id="caixaMenu">
-        <a href="?page=listarSolicitante" class="nav-link" id="">
-          <i class="nav-icon fas fa-cogs"></i>
-          <p>
-            Configurações
-            <i class="right fas fa-angle-left"></i>
-            <!-- <span class="badge badge-info right">2</span> -->
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="?page=listardispesas" class="nav-link" id="dispesaActiva">
-              <i class="nav-icon mdi mdi-cash-minus"></i>
-              <p>Tipo deDispesas </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="?page=" class="nav-link" id="profSolicitanteActiva">
-              <i class="nav-icon mdi mdi-cash-plus"></i>
-              <p>Receiras | Entrada</p>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <br />
-
-      <!--GESTÃO -->
+      <!-- <li class="nav-header text-uppercase">
+                <i class="fas fa-cogs nav-icon fa-fw fa-lg text-orange"> </i>
+                gestão
+            </li> -->
       <li class="nav-item has-treeview" id="gestaoMenu">
         <a href="#" class="nav-link" id="gestaoMenuActive">
           <i class="fas fa-cogs nav-icon fa-fw fa-lg text-orange"> </i>
@@ -234,6 +179,122 @@
 
         </ul>
       </li>
+
+
+
+
+
+      <!-- EXAMES
+      <li class="nav-header text-uppercase">
+        <i class="fas fa-vials nav-icon fa-fw fa-lg text-danger"> </i>
+        EXAMES
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-file-medical"></i>
+          <p>Solicitar Exame</p>
+        </a>
+      </li>-->
+
+      <!-- <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-vials fa-fw"></i>
+                    <p>Exames</p>
+                </a>
+            </li> -->
+
+      <!-- <li class="nav-item has-treeview">
+                <a href="#" class="nav-link ">
+                    <i class="fas fa-vials nav-icon fa-fw fa-lg text-danger"> </i>
+                    <p>
+                        Exames
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link ">
+                            <i class="fas fa-vials fa-fw nav-icon"></i>
+                            <p>Gestão de Exames</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>---</p>
+                        </a>
+                    </li>
+                </ul>
+            </li> -->
+
+
+      <!-- FINANCEIRO -->
+      <li class="nav-header text-uppercase">
+        <i class="fas fa-dollar-sign nav-icon fa-fw fa-lg text-success"> </i>
+        FINANCEIRO
+      </li>
+      <!--Caixa-->
+      <li class="nav-item has-treeview " id="caixaMenu">
+        <a href="?page=listarSolicitante" class="nav-link" id="">
+          <i class="nav-icon fas fa-cash-register"></i>
+          <p>
+            Caixa
+            <i class="right fas fa-angle-left"></i>
+            <!-- <span class="badge badge-info right">2</span> -->
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="?page=listardispesas" class="nav-link" id="dispesaActiva">
+              <i class="nav-icon mdi mdi-cash-minus"></i>
+              <p>Dispesas | Saída</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="?page=" class="nav-link" id="profSolicitanteActiva">
+              <i class="nav-icon mdi mdi-cash-plus"></i>
+              <p>Receiras | Entrada</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!--Configurações-->
+      <li class="nav-item has-treeview " id="caixaMenu">
+        <a href="?page=listarSolicitante" class="nav-link" id="">
+          <i class="nav-icon fas fa-cogs"></i>
+          <p>
+            Configurações
+            <i class="right fas fa-angle-left"></i>
+            <!-- <span class="badge badge-info right">2</span> -->
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="?page=listardispesas" class="nav-link" id="dispesaActiva">
+              <i class="nav-icon mdi mdi-cash-minus"></i>
+              <p>Tipo de Dispesas </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="?page=" class="nav-link" id="profSolicitanteActiva">
+              <i class="nav-icon mdi mdi-cash-plus"></i>
+              <p>Receiras | Entrada</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+
+
+
+
+
+      <!--<li class="nav-item">
+        <a href="?page=listardispesas" class="nav-link">
+          <i class="nav-icon mdi mdi-cash-minus mdi-24px"></i>
+          <p>Dispesas</p>
+        </a>
+      </li>-->
 
       <!-- SOLICITAÇÕES -->
       <li class="nav-header text-uppercase">
