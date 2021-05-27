@@ -152,7 +152,7 @@
 
 
       <!--GESTÃO -->
-      <li class="nav-item has-treeview" id="gestaoMenu">
+      <!--  <li class="nav-item has-treeview" id="gestaoMenu">
         <a href="#" class="nav-link" id="gestaoMenuActive">
           <i class="fas fa-cogs nav-icon fa-fw fa-lg text-orange"> </i>
           <p>
@@ -160,9 +160,9 @@
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
-        <ul class="nav nav-treeview">
+        <ul class="nav nav-treeview"> -->
 
-          <!-- <li class="nav-item">
+      <!-- <li class="nav-item">
             <a href="?page=listarParceiros" class="nav-link" id="parceiros">
               <i class="nav-icon fas fa-hospital-alt"></i>
               <p>Parceiros</p>
@@ -173,20 +173,20 @@
               <i class="nav-icon fas fa-user-injured"></i>
               <p>
                 Paciente-->
-          <!-- <span class="badge badge-info right">2</span> -->
-          <!--</p>
+      <!-- <span class="badge badge-info right">2</span> -->
+      <!--</p>
             </a>
           </li>-->
 
-          <!-- <li class="nav-item has-treeview-" id="">
+      <!-- <li class="nav-item has-treeview-" id="">
             <a href="?page=listarConvenios" class="nav-link" id="menuConvenio">
               <i class="nav-icon fas fa-first-aid"></i>
               <p>
                 Convênios | Planos
                 <!-- <i class="right fas fa-angle-left"></i> -->
-          <!-- <span class="badge badge-info right">2</span> -->
-          </p>
-          </a>
+      <!-- <span class="badge badge-info right">2</span> -->
+      <!-- </p>
+      </a>
       </li>
       <li class="nav-item has-treeview " id="gestExameMenu">
         <a href="" class="nav-link" id="">
@@ -211,9 +211,9 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li>-->
       <!-- Materiais -->
-      <li class="nav-item has-treeview" id="gestMaterialMenu">
+      <!-- <li class="nav-item has-treeview" id="gestMaterialMenu">
         <a href="?page=listarMateriais" class="nav-link">
           <i class="fas fa-dolly-flatbed fa-fw nav-icon"></i>
           <p>Gestão de Materiais
@@ -236,7 +236,7 @@
           </li>
         </ul>
 
-      </li>
+      </li>-->
 
 
     </ul>

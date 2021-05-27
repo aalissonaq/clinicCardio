@@ -50,7 +50,7 @@
               <i class="mdi mdi-cash-minus"></i>
               DESCRIÇÃO DA DESPESA
             </th>
-            <th class="col-md-auto text-center align-middle">
+            <th class="col-md-auto text-center1 align-middle">
               <i class="mdi mdi-cash-multiple"></i>
               VALOR
             </th>
@@ -59,7 +59,7 @@
               TIPO DESPESA
             </th>
             <th class="col-md-auto text-center align-middle">
-              <i class="mdi mdi-source-fork"></i>
+              <i class="mdi mdi-hexagon-multiple-outline"></i>
               STATUS
             </th>
             <th class="col-md-auto text-center align-middle">
@@ -70,53 +70,41 @@
         <tbody>
           <?php
           $cont = 0;
-          $ler = ler("vw_pessoa_paciente", '', "ORDER BY nmPessoa ASC");
+          $ler = ler("despesa", '', "ORDER BY cadastroDespesa DESC");
           $listar = $ler->fetchAll(PDO::FETCH_ASSOC);
           foreach ($listar as $dados) {
             $cont = $cont + 1;
           ?>
-            <tr>
-              <td class="text-center align-middle">
-                <?= str_pad($cont, 3, "0", STR_PAD_LEFT); ?>
-              </td>
+          <tr>
+            <td class="text-center align-middle">
+              <?= date('d/m/Y', strtotime($dados['cadastroDespesa'])); ?>
+            </td>
 
-              <td class="text-uppercase align-middle">
-                <?= $dados['nmPessoa'] ?>
-              </td>
+            <td class="text-uppercase align-middle">
+              <?= $dados['descricaoDespesa'] ?>
+            </td>
 
-              <td class="text-center text-uppercase align-middle">
-                <?= MascaraCPF($dados['docPessoa']) ?>
-              </td>
-              <td class="text-center text-uppercase align-middle">
-                <?= $dados['sexoPaciente'] ?>
-              </td>
-              <td class="text-center align-middle">
-                <?= str_pad(calcIdade($dados['dtNascPessoa']), 2, "0", STR_PAD_LEFT); ?>
-              </td>
+            <td class="text-center1 text-uppercase align-middle">
+              R$ <?= formatMoedaBr($dados['vlDespesa']) ?>
+            </td>
+            <td class="text-center text-uppercase align-middle">
+              <?= $dados['tipoDespesa'] ?>
+            </td>
+            <td class="text-center text-uppercase align-middle">
+              <?= $dados['statusDespesa'] ?>
+            </td>
 
-              <td class="align-middle">
+            <td class="align-middle">
 
-                <ul class="nav justify-content-center">
+              <ul class="nav justify-content-center">
 
-                  <?php
+                <?php
                   switch ($_SESSION['NIVEL']) {
                     case '0':
 
                       echo "<li class=\"nav-item\">
     <a href=\"?page=viewUsuario&idEdit={$dados['idPessoaPaciente']}\" class=\"btn btn-tool\" target=\"\" title=\"Ver Dados\" rel=\"noopener noreferrer\">
       <i class=\"far fa-eye fa-lg\"></i>
-    </a>
-  </li>
-
-  <li class=\"nav-item\">
-    <a href=\"?page=edtUsuario&idEdit={$dados['idPessoaPaciente']}\" class=\"btn btn-tool\" target=\"\" title=\"Editar\" rel=\"noopener noreferrer\">
-      <i class=\"far fa-edit fa-lg\"></i>
-    </a>
-  </li>
-
-  <li class=\"nav-item\">
-    <a href=\"?page=edtUsuario&idEdit={$dados['idPessoaPaciente']}\" class=\"btn btn-tool\" target=\"\" title=\"Solicitar Exames\" rel=\"noopener noreferrer\">
-      <i class=\"fas fa-vials fa-lg\"></i>
     </a>
   </li>
  ";
@@ -143,12 +131,12 @@
 
 
 
-                </ul>
+              </ul>
 
-                </ul>
+              </ul>
 
-              </td>
-            </tr>
+            </td>
+          </tr>
           <?php } ?>
         </tbody>
       </table>
@@ -177,190 +165,49 @@
       </div>
       <div class="modal-body">
         <!-- form novo Usuário -->
-
-        <form class="needs-validation" novalidate action="pages/pages/acoes/gravaNovoPaciente.php" method="POST" enctype="multipart/form-data">
+        <form class="needs-validation" novalidate action="pages/pages/acoes/gravaNovoDispesa.php" method="POST"
+          enctype="multipart/form-data">
           <div class="form-row">
-            <div class="col-md-9 mb-3 ">
-              <label for="nmPessoa">Nome do Paciente</label>
-              <input type="text" name="nmPessoa" class="form-control text-uppercase  " id="nmPessoa" placeholder="Nome do Paciente" value="" required>
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-            <div class="col-md-3 mb-3">
-              <label for="docPessoa">CPF</label>
-              <input type="text" name="docPessoa" class="form-control text-uppercase js_cpf" id="docPessoa" placeholder="Somente Números" required>
+            <div class="col-md-12 mb-3 ">
+              <label for="descricaoDespesa">Dispesa</label>
+              <input type="text" name="descricaoDespesa" class="form-control text-uppercase  " id="descricaoDespesa"
+                placeholder="Despesa" value="" required>
               <div class="invalid-feedback">
                 Obrigatório !
               </div>
             </div>
           </div>
           <div class="form-row">
-            <div class="col-md-2 mb-3">
-              <label for="dtNascPessoa">Data de Nascimento</label>
-              <input type="text" name="dtNascPessoa" class="form-control text-uppercase js_data" id="dtNascPessoa" placeholder="dd/mm/yyyy" required>
+            <div class="col-md-3 mb-3">
+              <label for="vlDespesa">Valor Gasto</label>
+              <input type="text" maxlength="12" name="vlDespesa" class="form-control text-uppercase js_dinheiro"
+                id="vlDespesa" placeholder="Somente Números" required>
+              <div class="invalid-feedback">
+                Obrigatório !
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="tipoDespesa">Tipo de Despesa</label>
+              <input type="text" name="tipoDespesa" class="form-control text-uppercase" id="tipoDespesa" placeholder=""
+                required>
               <div class="invalid-feedback">
                 Obrigatório !
               </div>
             </div>
 
-            <div class="col-md-2 mb-3">
-              <label for="sexoPaciente">Sexo</label>
-              <select class="form-control text-uppercase" required name="sexoPaciente" id="sexoPaciente">
-                <option value="Masculino">M</option>
-                <option value="Feminino">F</option>
+            <div class="col-md-3 mb-3">
+              <label for="statusDespesa">Status</label>
+              <select class="form-control text-uppercase" required name="statusDespesa" id="statusDespesa">
+                <option value="Pago">Pago</option>
+                <option value="Agendado">Agendado</option>
               </select>
               <div class="invalid-feedback">
                 Obrigatório !
               </div>
             </div>
 
-            <div class="col-md-3 mb-3">
-              <label for="strEstadoCivilPaciente">Estado Civil</label>
-              <select class="form-control text-uppercase" required name="strEstadoCivilPaciente" id="strEstadoCivilPaciente">
-                <option value="Solteiro">Solteiro</option>
-                <option value="Casado">Casado</option>
-                <option value="Viúvo">Viúvo</option>
-                <option value="Separado judicialme">Separado judicialme</option>
-                <option value="Divorciado">Divorciado</option>
-                <option value="Não Informado">Não Informado</option>
-              </select>
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <label for="strNaturalidadePaciente">Naturalidade</label>
-              <input type="text" name="strNaturalidadePaciente" class="form-control text-uppercase" id="strNaturalidadePaciente" placeholder="">
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-
-            <div class="col-md-2 mb-3">
-              <label for="nnRg">C. Identidade</label>
-              <input type="number" name="nnRg" class="form-control text-uppercase" id="nnRg" placeholder="">
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-
-
-            <div class="col-md-12 mb-3">
-              <label for="nmMae">Nome da Mãe</label>
-              <input type="text" required name="nmMae" class="form-control text-uppercase" id="nmMae" placeholder="">
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-            <div class="col-md-12 mb-3">
-              <label for="nmPai">Nome da Pai</label>
-              <input type="text" name="nmPai" class="form-control text-uppercase" id="nmPai" placeholder="">
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-            <div class="col-md-12 mb-3">
-              <label for="nmResponsavel">Responsavel</label>
-              <input type="text" name="nmResponsavel" class="form-control text-uppercase" id="nmResponsavel" placeholder="quando responvel">
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-
-          </div>
-          <!-- CONTATOS -->
-
-          <fieldset>
-            <legend>
-              <p class="lead">
-                DADOS DE ENDEREÇO
-              </p>
-            </legend>
-          </fieldset>
-
-          <div class="form-row">
-            <div class="col-md-2 mb-3">
-              <label for="stCepPessoa">CEP</label>
-              <input type="text" name="stCepPessoa" class="form-control text-uppercase js_cep" id="stCepPessoa" placeholder="">
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-
-            <div class="col-md-8 mb-3">
-              <label for="stLogradouroPessoa">Endereço</label>
-              <input type="text" name="stLogradouroPessoa" class="form-control text-uppercase" id="stLogradouroPessoa" placeholder="" required>
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-            <div class="col-md-2 mb-3">
-              <label for="nnCasaPessoa">Nº</label>
-              <input type="number" name="nnCasaPessoa" class="form-control text-uppercase" id="nnCasaPessoa" placeholder="" required>
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-
-          </div>
-          <div class="form-row">
-            <div class="col-md-5 mb-3">
-              <label for="stCompleEndPessoa">Complemento</label>
-              <input type="text" name="stCompleEndPessoa" class="form-control text-uppercase" id="stCompleEndPessoa" placeholder="">
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-              <label for="stBairroPessoa">Bairro</label>
-              <input type="text" name="stBairroPessoa" class="form-control text-uppercase" id="stBairroPessoa" placeholder="" required>
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-            <div class="col-md-1 mb-3">
-              <label for="stEstadoPessoa">UF</label>
-              <input type="text" name="stEstadoPessoa" maxlength="2" class="form-control text-uppercase" id="stEstadoPessoa" placeholder="" required>
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
           </div>
 
-          <fieldset>
-            <legend>
-              <p class="lead">
-                DADOS DE CONTATOS
-              </p>
-            </legend>
-          </fieldset>
-
-          <div class="form-row">
-            <div class="col-md-3 mb-3">
-              <label for="nnTelefonePessoa">Telefone</label>
-              <input type="text" name="nnTelefonePessoa" class="form-control text-uppercase js_fone" id="nnTelefonePessoa" placeholder="" required>
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-            <div class="col-md-3 mb-3">
-              <label for="nnWhatsappPessoa">Whataspp</label>
-              <input type="text" name="nnWhatsappPessoa" class="form-control text-uppercase js_fone" id="nnWhatsappPessoa" placeholder="">
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="stEmailPessoa">E-Mail</label>
-              <input type="email" name="stEmailPessoa" class="form-control" id="stEmailPessoa" placeholder="">
-              <div class="invalid-feedback">
-                Obrigatório e deve seguir o padrão de E-maio(text@provedor.com...) !
-              </div>
-            </div>
-          </div>
 
       </div>
       <div class="modal-footer justify-content-between">
@@ -382,119 +229,120 @@
 <!-- /.modal -->
 
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js">
+<script type="text/javascript"
+  src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js">
 </script>
 
 <script src="./dist/js/app.js"></script>
 
 <script>
-  document.getElementById('caixaMenu').classList.add("menu-open");
-  document.getElementById('gestaoMenuActive').classList.add("active");
-  document.getElementById('dispesaActiva').classList.add("active");
+document.getElementById('caixaMenu').classList.add("menu-open");
+//document.getElementById('gestaoMenuActive').classList.add("active");
+document.getElementById('dispesaActiva').classList.add("active");
 
-  // DATATABLE
-  // $(".table").DataTable({
-  //   responsive: true,
-  //   bLengthChange: false,
-  //   pageLength: 20,
-  //   bInfo: true,
-  //   bFilter: true,
-  //   bSort: false,
-  //   language: {
-  //     url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
-  //   }
-  // });
+// DATATABLE
+// $(".table").DataTable({
+//   responsive: true,
+//   bLengthChange: false,
+//   pageLength: 20,
+//   bInfo: true,
+//   bFilter: true,
+//   bSort: false,
+//   language: {
+//     url: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json"
+//   }
+// });
 
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-  (function() {
-    'use strict';
-    window.addEventListener('load', function() {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 
-  // Adicionando Javascript
-  function limpa_formulário_cep() {
-    //Limpa valores do formulário de cep.
-    document.getElementById("logradouro").value = "";
-    document.getElementById("bairro").value = "";
-    document.getElementById("cidade").value = "";
-    document.getElementById("estado").value = "";
-    // document.getElementById("ibge").value = "";
+// Adicionando Javascript
+function limpa_formulário_cep() {
+  //Limpa valores do formulário de cep.
+  document.getElementById("logradouro").value = "";
+  document.getElementById("bairro").value = "";
+  document.getElementById("cidade").value = "";
+  document.getElementById("estado").value = "";
+  // document.getElementById("ibge").value = "";
+}
+
+function meu_callback(conteudo) {
+  if (!("erro" in conteudo)) {
+    //Atualiza os campos com os valores.
+    document.getElementById("logradouro").value =
+      conteudo.logradouro;
+    document.getElementById("bairro").value =
+      conteudo.bairro;
+    document.getElementById("cidade").value =
+      conteudo.localidade;
+    document.getElementById("estado").value =
+      conteudo.uf;
+    //document.getElementById("ibge").value =
+    //conteudo.ibge;
+  } //end if.
+  else {
+    //CEP não Encontrado.
+    limpa_formulário_cep();
+    alert("CEP não encontrado.");
   }
+}
 
-  function meu_callback(conteudo) {
-    if (!("erro" in conteudo)) {
-      //Atualiza os campos com os valores.
+function pesquisacep(valor) {
+  //Nova variável "cep" somente com dígitos.
+  var cep = valor.replace(/\D/g, "");
+
+  //Verifica se campo cep possui valor informado.
+  if (cep != "") {
+    //Expressão regular para validar o CEP.
+    var validacep = /^[0-9]{8}$/;
+
+    //Valida o formato do CEP.
+    if (validacep.test(cep)) {
+      //Preenche os campos com "..." enquanto consulta webservice.
       document.getElementById("logradouro").value =
-        conteudo.logradouro;
-      document.getElementById("bairro").value =
-        conteudo.bairro;
-      document.getElementById("cidade").value =
-        conteudo.localidade;
-      document.getElementById("estado").value =
-        conteudo.uf;
-      //document.getElementById("ibge").value =
-      //conteudo.ibge;
+        "...";
+      document.getElementById("bairro").value = "...";
+      document.getElementById("cidade").value = "...";
+      document.getElementById("estado").value = "...";
+      //document.getElementById("ibge").value = "...";
+
+      //Cria um elemento javascript.
+      var script = document.createElement("script");
+
+      //Sincroniza com o callback.
+      script.src =
+        "https://viacep.com.br/ws/" +
+        cep +
+        "/json/?callback=meu_callback";
+
+      //Insere script no documento e carrega o conteúdo.
+      document.body.appendChild(script);
     } //end if.
     else {
-      //CEP não Encontrado.
+      //cep é inválido.
       limpa_formulário_cep();
-      alert("CEP não encontrado.");
+      alert("Formato de CEP inválido.");
     }
+  } //end if.
+  else {
+    //cep sem valor, limpa formulário.
+    limpa_formulário_cep();
   }
-
-  function pesquisacep(valor) {
-    //Nova variável "cep" somente com dígitos.
-    var cep = valor.replace(/\D/g, "");
-
-    //Verifica se campo cep possui valor informado.
-    if (cep != "") {
-      //Expressão regular para validar o CEP.
-      var validacep = /^[0-9]{8}$/;
-
-      //Valida o formato do CEP.
-      if (validacep.test(cep)) {
-        //Preenche os campos com "..." enquanto consulta webservice.
-        document.getElementById("logradouro").value =
-          "...";
-        document.getElementById("bairro").value = "...";
-        document.getElementById("cidade").value = "...";
-        document.getElementById("estado").value = "...";
-        //document.getElementById("ibge").value = "...";
-
-        //Cria um elemento javascript.
-        var script = document.createElement("script");
-
-        //Sincroniza com o callback.
-        script.src =
-          "https://viacep.com.br/ws/" +
-          cep +
-          "/json/?callback=meu_callback";
-
-        //Insere script no documento e carrega o conteúdo.
-        document.body.appendChild(script);
-      } //end if.
-      else {
-        //cep é inválido.
-        limpa_formulário_cep();
-        alert("Formato de CEP inválido.");
-      }
-    } //end if.
-    else {
-      //cep sem valor, limpa formulário.
-      limpa_formulário_cep();
-    }
-  }
+}
 </script>
