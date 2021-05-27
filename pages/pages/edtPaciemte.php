@@ -348,9 +348,9 @@
 </section>
 <!-- /.content -->
 <script>
-document.getElementById('gestaoMenu').classList.add("menu-open");
-document.getElementById('gestaoMenuActive').classList.add("active");
-document.getElementById('userSystem').classList.add("active");
+//document.getElementById('gestaoMenu').classList.add("menu-open");
+//document.getElementById('gestaoMenuActive').classList.add("active");
+document.getElementById('menuPacientes').classList.add("active");
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {

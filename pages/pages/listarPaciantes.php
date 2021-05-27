@@ -102,8 +102,8 @@
                                             </a>
                                           </li>
                                           <li class=\"nav-item\">
-                                          <a href=\"?page=edtUsuario&idEdit={$dados['idPassoaPessoa']}\" class=\"btn btn-tool\" target=\"\"
-                                          title=\"Editar Paciente\" rel=\"noopener noreferrer\" data-toggle=\"modal\" data-target=\"#modal-editPaciente\">
+                                          <a href=\"?page=edtPaciente&idEdit={$dados['idPassoaPessoa']}\" class=\"btn btn-tool\" target=\"\"
+                                          title=\"Editar Paciente\" rel=\"noopener noreferrer\" >
                                               <!-- <i class=\"fas fa-pen fa-lg\"></i> -->
                                               <i class=\"mdi mdi-account-edit-outline mdi-24px\"></i>
                                             </a>
@@ -754,8 +754,8 @@
 <script src="./dist/js/app.js"></script>
 
 <script>
-document.getElementById('gestaoMenu').classList.add("menu-open");
-document.getElementById('gestaoMenuActive').classList.add("active");
+//document.getElementById('gestaoMenu').classList.add("menu-open");
+//document.getElementById('gestaoMenuActive').classList.add("active");
 document.getElementById('menuPacientes').classList.add("active");
 
 // DATATABLE

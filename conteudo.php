@@ -25,12 +25,12 @@ if (!isset($_GET['page']) || $_GET['page'] == null) {
       include "./pages/pages/verUsuario.php";
       break;
 
-      #EXAMES
-    case 'listarExamesGest':
-      include "./pages/pages/listarExamesGest.php";
+      #SERVIÇOS
+    case 'listarServicos':
+      include "./pages/pages/listarServicos.php";
       break;
-    case 'cadNovoExame':
-      include "./pages/pages/cadNovoExame.php";
+    case 'editarServico':
+      include "./pages/pages/editarServico.php";
       break;
     case 'edtExame':
       include "./pages/pages/edtExamesac.php";

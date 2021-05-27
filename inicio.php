@@ -22,6 +22,20 @@ if (!isset($_SESSION['USUARIO'])) {
   if ($bloc) {
     header("Location: ?page=listarusuarios");
   }
+} else if (isset($_GET['acao']) && $_GET['acao'] === 'blocService') {
+  // $blocId = $_GET['blocID'];
+  $dados['statusServico'] = '0';
+  $blocService = atualizar('servicos', $dados, "idServicos = {$_GET['id']}");
+  if ($blocService) {
+    header("Location: ?page=listarServicos");
+  }
+} else if (isset($_GET['acao']) && $_GET['acao'] === 'unblocService') {
+  // $blocId = $_GET['blocID'];
+  $dados['statusServico'] = '1';
+  $blocService = atualizar('servicos', $dados, "idServicos = {$_GET['id']}");
+  if ($blocService) {
+    header("Location: ?page=listarServicos");
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -45,11 +59,12 @@ if (!isset($_SESSION['USUARIO'])) {
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
   <!-- dataTables -->
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.css"/> -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.css" />
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css" />
 
-  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="node_modules/@mdi/font/css/materialdesignicons.min.css">
   <!-- <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.5.95/css/materialdesignicons.min.css"> -->
 
@@ -80,7 +95,8 @@ if (!isset($_SESSION['USUARIO'])) {
     <aside class="main-sidebar sidebar-dark-danger elevation-4">
       <!-- Brand Logo -->
       <a href="inicio.php" class="brand-link navbar-danger">
-        <img src="./image/iconeBbranco.png" alt="ClinicCardio" title="ClinicCardio" class="brand-image ml-2" style="opacity: 1" />
+        <img src="./image/iconeBbranco.png" alt="ClinicCardio" title="ClinicCardio" class="brand-image ml-2"
+          style="opacity: 1" />
         <span class="brand-text font-weight-light">
           <b>ClincCardio</b>| Sistema </span>
       </a>
@@ -107,10 +123,11 @@ if (!isset($_SESSION['USUARIO'])) {
     <!-- Main Footer -->
     <footer class="main-footer">
       <strong>Copyright &copy; 2019 - <?= date('Y', time()); ?> |
-        <a href="https://caririinovacao.com.br" target="_new">Desenvolvido por Cariri Inovação</a>-</strong>
-      Todos os direitos reservados.
+        <a href="https://caririinovacao.com.br" target="_new">Desenvolvido por Cariri Inovação </a> | </strong> <i>Todos
+        os
+        direitos reservados.</i>
       <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 1.2
+        <b>Version</b> 2.0
       </div>
     </footer>
   </div>
