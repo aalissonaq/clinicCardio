@@ -186,13 +186,15 @@
                 Obrigatório !
               </div>
             </div>
+
             <div class="col-md-2 mb-3">
               <label for="tipoDespesa">Tipo de Despesa</label>
-              <select class="form-control text-uppercase" required name="tipoDespesa" id="tipoDespesa">
+              <select class="form-control text-uppercase custom-select" required name="tipoDespesa" id="tipoDespesa">
                 <option value="" disabled selected>Selecione</option>
                 <option value="Eventual">Eventual</option>
                 <option value="Recorrente">Recorrente</option>
               </select>
+
 
               <div class="invalid-feedback">
                 Obrigatório !
@@ -214,7 +216,11 @@
               <div class="invalid-feedback">
                 Obrigatório !
               </div>
+
             </div>
+
+
+
             <div class="col-md-4 mb-3">
               <label for="dtPagamentoDespesa">Comprovante de Pagameto</label>
               <input type="file" name="" class="form-control text-uppercase " id="" placeholder="imagem ou PDF">
@@ -222,7 +228,9 @@
                 Obrigatório !
               </div>
             </div>
+
           </div>
+
 
       </div>
       <div class="modal-footer justify-content-between">
