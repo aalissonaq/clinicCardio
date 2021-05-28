@@ -178,7 +178,7 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="col-md-3 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="vlDespesa">Valor Gasto</label>
               <input type="text" maxlength="12" name="vlDespesa" class="form-control text-uppercase js_dinheiro"
                 id="vlDespesa" placeholder="Somente Números" required>
@@ -215,9 +215,14 @@
                 Obrigatório !
               </div>
             </div>
-            <?= $_SESSION['ID']; ?>
+            <div class="col-md-4 mb-3">
+              <label for="dtPagamentoDespesa">Comprovante de Pagameto</label>
+              <input type="file" name="" class="form-control text-uppercase " id="" placeholder="imagem ou PDF">
+              <div class="invalid-feedback">
+                Obrigatório !
+              </div>
+            </div>
           </div>
-
 
       </div>
       <div class="modal-footer justify-content-between">

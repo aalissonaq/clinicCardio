@@ -27,19 +27,10 @@ if (isset($_POST['gravar']) && $_POST['gravar'] == 'gravar') {
   $dados['idRespCadastroDispesa'] =  strip_tags(strip_tags(trim(strtoupper($_POST['idRespCadastroDispesa']))));
 
 
-
-
-
-
-  echo "<pre>";
-  print_r($dados);
-  echo "</pre>";
-
-
   inseir('despesa', $dados);
 
-  // echo "<script type='text/javascript'> alert('A Despesa  {$dados['descricaoDespesa']} foi Cadastrado com sucesso !');
-  // window.location = '../../../inicio.php?page=listardispesas';
-  // </script>";
+  echo "<script type='text/javascript'> alert('A Despesa  {$dados['descricaoDespesa']} foi Cadastrado com sucesso !');
+   window.location = '../../../inicio.php?page=listardespesas';
+   </script>";
 }
 //}
