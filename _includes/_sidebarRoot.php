@@ -71,9 +71,9 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="?page=listardispesas" class="nav-link" id="dispesaActiva">
+            <a href="?page=listardespesas" class="nav-link" id="dispesaActiva">
               <i class="nav-icon mdi mdi-cash-minus"></i>
-              <p>Dispesas | Saída</p>
+              <p>Despensas | Saída</p>
             </a>
           </li>
           <li class="nav-item">

@@ -2,13 +2,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Dispesas</h1>
+        <h1>Despensa </h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
           <li class="breadcrumb-item"><a href="#">Financeiro</a></li>
-          <li class="breadcrumb-item active">Dispesas</li>
+          <li class="breadcrumb-item active">Despensa </li>
         </ol>
       </div>
     </div>
@@ -21,14 +21,14 @@
   <!-- Default box -->
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Lista de Dispesas</h3>
+      <h3 class="card-title">Lista de Despensa </h3>
 
 
       <div class="card-tools">
         <a href="" class="btn btn-tool text-primary" data-toggle="modal" data-target="#modal-novoUsuario">
           <i class="fa fa-plus-square fa-fw fa-lg"></i>
           <!-- <i class="fa fa-user-plus fa-fw fa-lg"></i> -->
-          Nova Dispesas</a>
+          Nova Despensa </a>
         <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                              title="Collapse">
                              <i class="fas fa-minus"></i>ttt</button>
@@ -158,18 +158,18 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Novo Paciente</h4>
+        <h4 class="modal-title">Novo Despensa </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <!-- form novo Usuário -->
-        <form class="needs-validation" novalidate action="pages/pages/acoes/gravaNovoDispesa.php" method="POST"
+        <form class="needs-validation" novalidate action="pages/pages/acoes/gravaNovoDespesa.php" method="POST"
           enctype="multipart/form-data">
           <div class="form-row">
             <div class="col-md-12 mb-3 ">
-              <label for="descricaoDespesa">Dispesa</label>
+              <label for="descricaoDespesa">Despesa</label>
               <input type="text" name="descricaoDespesa" class="form-control text-uppercase  " id="descricaoDespesa"
                 placeholder="Despesa" value="" required>
               <div class="invalid-feedback">
@@ -186,31 +186,43 @@
                 Obrigatório !
               </div>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-2 mb-3">
               <label for="tipoDespesa">Tipo de Despesa</label>
-              <input type="text" name="tipoDespesa" class="form-control text-uppercase" id="tipoDespesa" placeholder=""
-                required>
-              <div class="invalid-feedback">
-                Obrigatório !
-              </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-              <label for="statusDespesa">Status</label>
-              <select class="form-control text-uppercase" required name="statusDespesa" id="statusDespesa">
-                <option value="Pago">Pago</option>
-                <option value="Agendado">Agendado</option>
+              <select class="form-control text-uppercase" required name="tipoDespesa" id="tipoDespesa">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Eventual">Eventual</option>
+                <option value="Recorrente">Recorrente</option>
               </select>
+
               <div class="invalid-feedback">
                 Obrigatório !
               </div>
             </div>
 
+            <div class="col-md-2 mb-3">
+              <label for="dtVencimentoDespesa">Data de Venvimento</label>
+              <input type="date" name="dtVencimentoDespesa" class="form-control text-uppercase "
+                id="dtVencimentoDespesa" placeholder="Somente Números" required>
+              <div class="invalid-feedback">
+                Obrigatório !
+              </div>
+            </div>
+            <div class="col-md-2 mb-3">
+              <label for="dtPagamentoDespesa">Data do Pagamento</label>
+              <input type="date" name="dtPagamentoDespesa" class="form-control text-uppercase " id="dtPagamentoDespesa"
+                placeholder="Somente Números">
+              <div class="invalid-feedback">
+                Obrigatório !
+              </div>
+            </div>
+            <?= $_SESSION['ID']; ?>
           </div>
 
 
       </div>
       <div class="modal-footer justify-content-between">
+
+        <input type="hidden" name="idRespCadastroDispesa" value="<?= $_SESSION['ID']; ?>">
         <input type="hidden" name="gravar" value="gravar">
         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times fa-fw fa-lg"></i>
           Fechar </button>

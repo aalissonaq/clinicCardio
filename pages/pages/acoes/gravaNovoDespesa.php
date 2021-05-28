@@ -14,12 +14,32 @@ if (isset($_POST['gravar']) && $_POST['gravar'] == 'gravar') {
   $dados['vlDespesa'] = strip_tags(strip_tags(trim(strtoupper($vl))));
   //$dados['vlServico'] = strip_tags(strip_tags(trim(strtoupper(str_replace(",", ".", $_POST['vlServico'])))));
   $dados['tipoDespesa'] = strip_tags(strip_tags(trim(strtoupper($_POST['tipoDespesa']))));
-  $dados['statusDespesa'] = strip_tags(strip_tags(trim(strtoupper($_POST['statusDespesa']))));
+  //$dados['statusDespesa'] = strip_tags(strip_tags(trim(strtoupper($_POST['statusDespesa']))));
+  $dados['dtVencimentoDespesa'] = strip_tags(strip_tags(trim(strtoupper($_POST['dtVencimentoDespesa']))));
+
+  $dados['dtPagamentoDespesa'] = strip_tags(strip_tags(trim(strtoupper($_POST['dtPagamentoDespesa']))));
+  if (empty($dados['dtPagamentoDespesa'])) {
+    $dados['statusDespesa'] = 'AGENDADO';
+  } else {
+    $dados['statusDespesa'] = 'PAGO';
+  }
+
+  $dados['idRespCadastroDispesa'] =  strip_tags(strip_tags(trim(strtoupper($_POST['idRespCadastroDispesa']))));
+
+
+
+
+
+
+  echo "<pre>";
+  print_r($dados);
+  echo "</pre>";
+
 
   inseir('despesa', $dados);
 
-  echo "<script type='text/javascript'> alert('A Despesa  {$dados['descricaoDespesa']} foi Cadastrado com sucesso !');
-   window.location = '../../../inicio.php?page=listardispesas';
-   </script>";
+  // echo "<script type='text/javascript'> alert('A Despesa  {$dados['descricaoDespesa']} foi Cadastrado com sucesso !');
+  // window.location = '../../../inicio.php?page=listardispesas';
+  // </script>";
 }
 //}
