@@ -18,7 +18,10 @@ nbproject/private
 // Node / Bower
 node_modules/
 bower_components/
-upload/*
+upload/comporvantesDespesa/*.jpg
+upload/comporvantesDespesa/*.png
+upload/comporvantesDespesa/*.gif
+upload/comporvantesDespesa/*.pdf
 
 // Plugins
 /plugins/*/*.md
