@@ -316,6 +316,73 @@ function nContrato($tabela, $casas)
 }
 
 /* * ***************************
+  UPLOAD DE AQUIVOS
+ * *************************** */
+function upLoadFile($file, $tamanho, array $extensoes, $pasta)
+{
+  // Pasta onde o arquivo vai ser salvo
+  $_UP['pasta'] = $pasta . '/';
+
+  // Tamanho máximo do arquivo (em Bytes)
+  $_UP['tamanho'] = 1024 * 1024 * $tamanho;
+
+  // Array com as extensões permitidas
+  $_UP['extensoes'] = $extensoes;
+
+
+  // Array com os tipos de erros de upload do PHP
+  $_UP['erros'][0] = 'Não houve erro';
+  $_UP['erros'][1] = 'O arquivo no upload é maior do que o limite do PHP';
+  $_UP['erros'][2] = 'O arquivo ultrapassa o limite de tamanho especifiado no HTML';
+  $_UP['erros'][3] = 'O upload do arquivo foi feito parcialmente';
+  $_UP['erros'][4] = 'Não foi feito o upload do arquivo';
+
+  // Verifica se houve algum erro com o upload. Se sim, exibe a mensagem do erro
+  if ($file['error'] != 0) {
+    return "Não foi possível fazer o upload, erro:<br />" . $_UP['erros'][$file['error']];
+    exit; // Para a execução do script
+  }
+
+  // Caso script chegue a esse ponto, não houve erro com o upload e o PHP pode continuar
+
+  // Faz a verificação da extensão do arquivo
+  $extensao = strtolower(end(explode('.', $file['name'])));
+  if (array_search($extensao, $_UP['extensoes']) === false) {
+
+    foreach ($extensoes as $filds => $values) {
+      $extensoesAceitas[] = $values;
+    }
+    $extensoesAceitas = implode(", ", $extensoesAceitas);
+    return
+      "<script type='text/javascript'> alert('Por favor, envie arquivo com em uma dos segiuontes formatos: {$extensoesAceitas}');
+    window.location = '../../../inicio.php?page=listardespesas';
+    </script>";
+  }
+
+
+  // Faz a verificação do tamanho do arquivo
+  else if ($_UP['tamanho'] < $file['size']) {
+    return
+      "<script type='text/javascript'> alert('O arquivo enviado é muito grande, envie arquivos de até {$tamanho}Mb.');
+      window.location = '../../../inicio.php?page=listardespesas';
+      </script>";
+  }
+  // Cria um nome baseado no UNIX TIMESTAMP atual
+  $nome_final = time() . '.' . substr($file['name'], -3);
+
+
+  // Depois verifica se é possível mover o arquivo para a pasta escolhida
+  if (move_uploaded_file($file['tmp_name'], $_UP['pasta'] . $nome_final)) {
+    // Upload efetuado com sucesso, exibe uma mensagem e um link para o arquivo
+    echo "Upload efetuado com sucesso!";
+    return  $nome_final;
+  } else {
+    // Não foi possível fazer o upload, provavelmente a pasta está incorreta
+    echo "Não foi possível enviar o arquivo, tente novamente";
+  }
+}
+
+/* * ***************************
   REDIMENTIONAR IMAGENS
  * *************************** */
 
@@ -347,7 +414,9 @@ function redimencionar($imagem, $largura, $pasta, $name)
   @imagedestroy($nova);
   return @$local;
 }
-
+/* * ***************************
+  RETIRAR MASCARAS
+ * *************************** */
 function tiraMascara($dado)
 {
   $semMascara = preg_replace("/\D+/", "", $dado);

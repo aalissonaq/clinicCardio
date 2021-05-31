@@ -29,6 +29,7 @@
           <i class="fa fa-plus-square fa-fw fa-lg"></i>
           <!-- <i class="fa fa-user-plus fa-fw fa-lg"></i> -->
           Nova Despensa </a>
+
         <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                              title="Collapse">
                              <i class="fas fa-minus"></i>ttt</button>
@@ -102,12 +103,19 @@
                   switch ($_SESSION['NIVEL']) {
                     case '0':
 
-                      echo "<li class=\"nav-item\">
+                      echo "
+                      <li class=\"nav-item\">
+    <a href=\"\" class=\"btn btn-tool\" target=\"\" title=\"Ver Dados\" rel=\"noopener noreferrer\"  data-toggle=\"modal\" data-target=\"#modal-edtDespesa\" idDesp=\" {$dados['idDespesa']}\"
+    onclick=\"editar(this)\">
+      <i class=\"mdi mdi-pencil\"></i>
+    </a>
+  </li>
+                      <li class=\"nav-item\">
     <a href=\"?page=viewUsuario&idEdit={$dados['idPessoaPaciente']}\" class=\"btn btn-tool\" target=\"\" title=\"Ver Dados\" rel=\"noopener noreferrer\">
       <i class=\"far fa-eye fa-lg\"></i>
     </a>
   </li>
- ";
+                      ";
                       break;
                       // case '2':
                       //     echo '<li class="nav-item">
@@ -128,8 +136,6 @@
                       break;
                   }
                   ?>
-
-
 
               </ul>
 
@@ -153,8 +159,107 @@
 </section>
 <!-- /.content -->
 
-<!-- modal -->
+<!-- modal nova despesa  -->
 <div class="modal fade" id="modal-novoUsuario">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Editar Despensa </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <!-- form novo Usuário -->
+        <form class="needs-validation" novalidate action="pages/pages/acoes/gravaNovoDespesa.php" method="POST"
+          enctype="multipart/form-data">
+          <div class="form-row">
+            <div class="col-md-12 mb-3 ">
+              <label for="descricaoDespesa">Despesa</label>
+              <input type="text" name="descricaoDespesa" class="form-control text-uppercase  " id="descricaoDespesa"
+                placeholder="Despesa" value="" required>
+              <div class="invalid-feedback">
+                Obrigatório !
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-2 mb-3">
+              <label for="vlDespesa">Valor Gasto</label>
+              <input type="text" maxlength="12" name="vlDespesa" class="form-control text-uppercase js_dinheiro"
+                id="vlDespesa" placeholder="Somente Números" required>
+              <div class="invalid-feedback">
+                Obrigatório !
+              </div>
+            </div>
+
+            <div class="col-md-2 mb-3">
+              <label for="tipoDespesa">Tipo de Despesa</label>
+              <select class="form-control text-uppercase custom-select" required name="tipoDespesa" id="tipoDespesa">
+                <option value="" disabled selected>Selecione</option>
+                <option value="Eventual">Eventual</option>
+                <option value="Recorrente">Recorrente</option>
+              </select>
+
+
+              <div class="invalid-feedback">
+                Obrigatório !
+              </div>
+            </div>
+
+            <div class="col-md-2 mb-3">
+              <label for="dtVencimentoDespesa">Data de Venvimento</label>
+              <input type="date" name="dtVencimentoDespesa" class="form-control text-uppercase "
+                id="dtVencimentoDespesa" placeholder="Somente Números" required>
+              <div class="invalid-feedback">
+                Obrigatório !
+              </div>
+            </div>
+            <div class="col-md-2 mb-3">
+              <label for="dtPagamentoDespesa">Data do Pagamento</label>
+              <input type="date" name="dtPagamentoDespesa" class="form-control text-uppercase " id="dtPagamentoDespesa"
+                placeholder="Somente Números" onblur="isRequiredPaymentVoucher(this.value)">
+              <div class="invalid-feedback">
+                Obrigatório !
+              </div>
+
+            </div>
+
+            <div class="col-md-4 mb-3">
+              <label for="strComprovanteDespesa">Comprovante de Pagameto <small>(imagem(jpg, png) ou PDF</small>
+              </label>
+              <input type="file" name="strComprovanteDespesa" class="form-control text-uppercase"
+                id="strComprovanteDespesa" placeholder="imagem ou PDF">
+              <div class="invalid-feedback">
+                Comprovanete Obrigatório para despesas pagas !
+              </div>
+            </div>
+          </div>
+
+      </div>
+      <div class="modal-footer justify-content-between">
+
+        <input type="hidden" name="idRespCadastroDispesa" value="<?= $_SESSION['ID']; ?>">
+        <input type="hidden" name="gravar" value="gravar">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times fa-fw fa-lg"></i>
+          Fechar </button>
+        <button class="btn btn-primary" type="submit">
+          <i class="far fa-save fa-fw fa-lg"></i>
+          Gravar Dados</button>
+        </form>
+        <!--/form novo Usuario -->
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- modal edit despesa  -->
+<div class="modal fade" id="modal-edtDespesa">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -212,25 +317,23 @@
             <div class="col-md-2 mb-3">
               <label for="dtPagamentoDespesa">Data do Pagamento</label>
               <input type="date" name="dtPagamentoDespesa" class="form-control text-uppercase " id="dtPagamentoDespesa"
-                placeholder="Somente Números">
+                placeholder="Somente Números" onblur="isRequiredPaymentVoucher(this.value)">
               <div class="invalid-feedback">
                 Obrigatório !
               </div>
 
             </div>
-
-
 
             <div class="col-md-4 mb-3">
-              <label for="dtPagamentoDespesa">Comprovante de Pagameto</label>
-              <input type="file" name="" class="form-control text-uppercase " id="" placeholder="imagem ou PDF">
+              <label for="strComprovanteDespesa">Comprovante de Pagameto <small>(imagem(jpg, png) ou PDF</small>
+              </label>
+              <input type="file" name="strComprovanteDespesa" class="form-control text-uppercase"
+                id="strComprovanteDespesa" placeholder="imagem ou PDF">
               <div class="invalid-feedback">
-                Obrigatório !
+                Comprovanete Obrigatório para despesas pagas !
               </div>
             </div>
-
           </div>
-
 
       </div>
       <div class="modal-footer justify-content-between">
@@ -254,6 +357,7 @@
 <!-- /.modal -->
 
 
+
 <script type="text/javascript"
   src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js">
 </script>
@@ -261,6 +365,13 @@
 <script src="./dist/js/app.js"></script>
 
 <script>
+function editar(valor) {
+  var t = getParam('idDesp').val();
+  var idDesp = valor;
+  console.log(t);
+
+}
+
 document.getElementById('caixaMenu').classList.add("menu-open");
 //document.getElementById('gestaoMenuActive').classList.add("active");
 document.getElementById('dispesaActiva').classList.add("active");

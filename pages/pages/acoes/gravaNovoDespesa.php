@@ -2,6 +2,7 @@
 
 require_once './../../../data/dbasys.php';
 require_once './../../../data/outfunc.php';
+require_once './../../../data/default.php';
 
 
 if (isset($_POST['gravar']) && $_POST['gravar'] == 'gravar') {
@@ -26,11 +27,20 @@ if (isset($_POST['gravar']) && $_POST['gravar'] == 'gravar') {
 
   $dados['idRespCadastroDispesa'] =  strip_tags(strip_tags(trim(strtoupper($_POST['idRespCadastroDispesa']))));
 
+  $pasta = "./../../../upload/comporvantesDespesa";
+  $extensoes = array('jpg', 'png', 'pdf');
+
+  if ($_FILES['strComprovanteDespesa']['name'] == '') {
+    $dados['strComprovanteDespesa'] = '';
+  } else {
+    // $dados['strComprovanteDespesa'] = $_FILES['strComprovanteDespesa'];
+    $dados['strComprovanteDespesa'] = upLoadFile($_FILES['strComprovanteDespesa'], 1,  $extensoes, $pasta);
+  }
 
   inseir('despesa', $dados);
 
   echo "<script type='text/javascript'> alert('A Despesa  {$dados['descricaoDespesa']} foi Cadastrado com sucesso !');
    window.location = '../../../inicio.php?page=listardespesas';
-   </script>";
+    </script>";
 }
 //}

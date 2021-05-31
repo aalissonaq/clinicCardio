@@ -61,7 +61,7 @@
       </li>
       <!--Caixa-->
       <li class="nav-item has-treeview " id="caixaMenu">
-        <a href="?page=listarSolicitante" class="nav-link" id="">
+        <a href="" class="nav-link" id="">
           <i class="nav-icon fas fa-cash-register"></i>
           <p>
             Caixa
@@ -237,8 +237,6 @@
         </ul>
 
       </li>-->
-
-
     </ul>
     </li>
 

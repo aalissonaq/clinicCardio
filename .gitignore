@@ -1,4 +1,4 @@
-// System / Log files 
+// System / Log files
 *.DS_Store
 *.log
 
@@ -18,6 +18,7 @@ nbproject/private
 // Node / Bower
 node_modules/
 bower_components/
+upload/*
 
 // Plugins
 /plugins/*/*.md

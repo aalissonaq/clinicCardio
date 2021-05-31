@@ -105,3 +105,13 @@ function Idade() {
   }
 
 }
+
+function isRequiredPaymentVoucher(valor) {
+
+  var dtpagaemnto = valor
+
+  //Verifica se campo daat de pagameto possui valor.
+  if (dtpagaemnto != "") {
+    document.getElementById('strComprovanteDespesa').required = 'required';
+  }
+}
