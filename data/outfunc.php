@@ -318,8 +318,11 @@ function nContrato($tabela, $casas)
 /* * ***************************
   UPLOAD DE AQUIVOS
  * *************************** */
-function upLoadFile($file, $tamanho, array $extensoes, $pasta)
+function upLoadFile($file, $tamanho, array $extensoes, $pasta, $largura = null)
 {
+  //Largura para redimencionar imagens
+  $largura = ($largura != null ? $largura : 768);
+
   // Pasta onde o arquivo vai ser salvo
   $_UP['pasta'] = $pasta . '/';
 
@@ -345,6 +348,7 @@ function upLoadFile($file, $tamanho, array $extensoes, $pasta)
 
   // Caso script chegue a esse ponto, não houve erro com o upload e o PHP pode continuar
 
+
   // Faz a verificação da extensão do arquivo
   $extensao = strtolower(end(explode('.', $file['name'])));
   if (array_search($extensao, $_UP['extensoes']) === false) {
@@ -359,20 +363,67 @@ function upLoadFile($file, $tamanho, array $extensoes, $pasta)
     </script>";
   }
 
+  if ($extensao == 'pdf') {
+    if ($_UP['tamanho'] < $file['size']) {
+      return
+        "<script type='text/javascript'> alert('O arquivo enviado é muito grande, envie arquivos de até {$tamanho}Mb.');
+        window.location = '../../../inicio.php?page=listardespesas';
+       </script>";
+    }
+  }
 
   // Faz a verificação do tamanho do arquivo
-  else if ($_UP['tamanho'] < $file['size']) {
-    return
-      "<script type='text/javascript'> alert('O arquivo enviado é muito grande, envie arquivos de até {$tamanho}Mb.');
-      window.location = '../../../inicio.php?page=listardespesas';
-      </script>";
-  }
+  //if ($_UP['tamanho'] < $file['size']) {
+  // return "muito grande{$file['size']} ";
+  // "<script type='text/javascript'> alert('O arquivo enviado é muito grande, envie //arquivos de até {$tamanho}Mb.');
+  //    window.location = '../../../inicio.php?page=listardespesas';
+  //   </script>";
+  //  }
   // Cria um nome baseado no UNIX TIMESTAMP atual
   $nome_final = time() . '.' . substr($file['name'], -3);
 
+  //$tipo = strtolower(reset(explode('/', $file['type'])));
+
+  if (strtolower(reset(explode('/', $file['type']))) == 'image') {
+    // Cria identificador para nova imagem
+    if ($file['type'] == "image/jpeg") {
+      $img = imagecreatefromjpeg($file['tmp_name']);
+    } else if ($file['type'] == "image/gif") {
+      $img = imagecreatefromgif($file['tmp_name']);
+    } else if ($file['type'] == "image/png") {
+      $img = imagecreatefrompng($file['tmp_name']);
+    }
+    $x = imagesx($img);
+    $y = imagesy($img);
+    $autura = ($largura * $y) / $x;
+    //imagem servirá de base para a imagem a ser reduzida
+    $nova = imagecreatetruecolor($largura, $autura);
+    // Faz a interpolação da imagem base com a imagem original
+    imagecopyresampled($nova, $img, 0, 0, 0, 0, $largura, $autura, $x, $y);
+
+    if ($file['type'] == "image/jpeg") {
+      $newImage =  imagejpeg($nova, $_UP['pasta'] . $nome_final, 90);
+    } else if ($file['type'] == "image/gif") {
+      $newImage = imagejpeg($nova, $_UP['pasta'] . $nome_final, 90);
+    } else if ($file['type'] == "image/png") {
+      $newImage = imagejpeg($nova, $_UP['pasta'] . $nome_final, 90);
+    }
+    @imagedestroy($img);
+    @imagedestroy($nova);
+    return  $nome_final;
+
+    // if (move_uploaded_file($newImage, $_UP['pasta'] . $nome_final)) {
+    // Upload efetuado com sucesso, exibe uma mensagem e um link para o arquivo
+    //    echo "Upload efetuado com sucesso!";
+    //    return  $nome_final;
+    //  } else {
+    //     // Não foi possível fazer o upload, provavelmente a pasta está incorreta
+    //    echo "Não foi possível enviar o arquivo, tente novamente";
+    //  }
+  }
 
   // Depois verifica se é possível mover o arquivo para a pasta escolhida
-  if (move_uploaded_file($file['tmp_name'], $_UP['pasta'] . $nome_final)) {
+  elseif (move_uploaded_file($file['tmp_name'], $_UP['pasta'] . $nome_final)) {
     // Upload efetuado com sucesso, exibe uma mensagem e um link para o arquivo
     echo "Upload efetuado com sucesso!";
     return  $nome_final;

@@ -28,7 +28,7 @@ if (isset($_POST['gravar']) && $_POST['gravar'] == 'gravar') {
   $dados['idRespCadastroDispesa'] =  strip_tags(strip_tags(trim(strtoupper($_POST['idRespCadastroDispesa']))));
 
   $pasta = "./../../../upload/comporvantesDespesa";
-  $extensoes = array('jpg', 'png', 'pdf');
+  $extensoes = array('jpg', 'jpeg', 'gif', 'png', 'pdf');
 
   if ($_FILES['strComprovanteDespesa']['name'] == '') {
     $dados['strComprovanteDespesa'] = '';

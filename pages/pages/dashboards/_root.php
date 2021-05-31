@@ -76,11 +76,7 @@
             <div class="info-box-content">
               <span class="info-box-text">Serviços </span>
               <span class="info-box-number">
-                <?php
-                $userSystem = ler('exemesac', '', "");
-                // echo $userSystem->rowCount();
-                ?>
-
+                <?= $service = ler('servicos', '', "")->rowCount(); ?>
               </span>
             </div>
             <!-- /.info-box-content -->
@@ -101,10 +97,7 @@
                 Usuários
               </span>
               <span class="info-box-number">
-                <?php
-                $userSystem = ler('users', '', "WHERE flStatusUser = 1");
-                echo $userSystem->rowCount() - 1;
-                ?>
+                <?= $userSystem = ler('users', '', "WHERE flStatusUser = 1")->rowCount() - 1; ?>
               </span>
             </div>
             <!-- /.info-box-content -->
