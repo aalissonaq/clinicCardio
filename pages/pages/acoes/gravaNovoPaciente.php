@@ -43,6 +43,7 @@ if (isset($_POST['gravar']) && $_POST['gravar'] == 'gravar') {
       $paciente['nmMae'] = strip_tags(strip_tags(trim(strtoupper($_POST['nmMae']))));
       $paciente['nmPai'] = strip_tags(strip_tags(trim(strtoupper($_POST['nmPai']))));
       $paciente['nmResponsavel'] = strip_tags(strip_tags(trim(strtoupper($_POST['nmResponsavel']))));
+      $paciente['idRespCadastroPaciente'] = strip_tags(strip_tags(trim(strtoupper($_POST['idRespCadastroPaciente']))));
 
       $isRegisteredPatient = ler('paciente', '', "WHERE idPessoa = '{$idRegisteredPerson}'")->rowCount();
 

@@ -412,6 +412,7 @@
 
       </div>
       <div class="modal-footer justify-content-between">
+        <input type="hidden" name="idRespCadastroPaciente" value="<?= $_SESSION['ID']; ?>">
         <input type="hidden" name="gravar" value="gravar">
         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times fa-fw fa-lg"></i>
           Fechar </button>
