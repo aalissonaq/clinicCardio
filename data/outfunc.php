@@ -259,6 +259,9 @@ function paginar($tabela, $where, $maximos, $link, $pag, $maxlinks = 8)
   }
 }
 
+
+
+
 /* * ***************************
   GERA NUMERO DE MATRICULA
  * *************************** */

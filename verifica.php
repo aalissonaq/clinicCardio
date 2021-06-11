@@ -26,6 +26,9 @@ if ($lerPessoa->rowCount() != 0) {
         $_SESSION['ID'] = $dadosUser['id'];
         $_SESSION['STATUS'] = $dadosUser['flStatusUser'];
         $_SESSION['NIVEL'] = $dadosUser['nivelUser'];
+
+        LogRegister('LogIn', "Usuário {$dadosP['nmPessoa']} Logou no Sistema ", $_SESSION['ID']);
+
         header("Location: inicio.php");
       }
     } else {

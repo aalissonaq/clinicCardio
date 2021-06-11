@@ -6,6 +6,7 @@ require_once './data/outfunc.php';
 if (!isset($_SESSION['USUARIO'])) {
   header("Location: index.php");
 } else if (isset($_GET['acao']) && $_GET['acao'] === 'sair') {
+  LogRegister('LogOut', "Usuário {$_SESSION['USUARIO']} Saiu do Sistema ", $_SESSION['ID']);
   session_destroy();
   header("Location: index.php");
 } else if (isset($_GET['acao']) && $_GET['acao'] === 'bloc') {

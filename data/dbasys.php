@@ -106,3 +106,19 @@ function get_enum($table_name, $field_name)
   }
   return FALSE;
 }
+
+
+/* * ***************************
+  GERA REGISTRO DE LOG
+ * *************************** */
+function LogRegister($acao, $descricao, $usuario)
+{
+  $tabela = 'logs';
+  //$campos = implode(', ', array_keys($dados));
+  //$valores = "'" . implode("', '", array_values($dados)) . "'";
+  $insert = connect()->prepare("INSERT INTO {$tabela}(`acao`, `descricaoLog`, `IdPessoa`) VALUES ('{$acao}','{$descricao}', '{$usuario}')");
+  $insert->execute();
+  if ($insert->rowCount()) {
+    return true;
+  }
+}

@@ -50,12 +50,14 @@ if (isset($_POST['gravar']) && $_POST['gravar'] == 'gravar') {
       if ($isRegisteredPatient != 0) {
       } else {
         inseir('paciente', $paciente);
+        $cpfPaciente = $_POST['docPessoa'];
+        LogRegister('Cadastro', "Cadastrou Paciente: {$dados['nmPessoa']} - {$cpfPaciente}", $paciente['idRespCadastroPaciente']);
       }
     }
   }
   echo "<script type='text/javascript'> alert('O Paciente {$dados['nmPessoa']} foi Cadastrado com sucesso !');
-    window.location = '../../../inicio.php?page=listarPaciantes';
-    </script>";
+   window.location = '../../../inicio.php?page=listarPaciantes';
+  </script>";
 
 
 
