@@ -13,6 +13,7 @@ if (!isset($_SESSION['USUARIO'])) {
   // $blocId = $_GET['blocID'];
   $dados['flStatusUser'] = '0';
   $bloc = atualizar('users', $dados, "id = {$_GET['blocID']}");
+  LogRegister('BlocUser', "Usuário {$_SESSION['USUARIO']} Bloqueou o usuário id-{$_GET['blocID']} ", $_SESSION['ID']);
   if ($bloc) {
     header("Location: ?page=listarusuarios");
   }
@@ -20,6 +21,7 @@ if (!isset($_SESSION['USUARIO'])) {
   // $blocId = $_GET['blocID'];
   $dados['flStatusUser'] = '1';
   $bloc = atualizar('users', $dados, "id = {$_GET['blocID']}");
+  LogRegister('UnBlocUser', "Usuário {$_SESSION['USUARIO']} Desbloqueou o usuário id-{$_GET['blocID']} ", $_SESSION['ID']);
   if ($bloc) {
     header("Location: ?page=listarusuarios");
   }
@@ -27,6 +29,7 @@ if (!isset($_SESSION['USUARIO'])) {
   // $blocId = $_GET['blocID'];
   $dados['statusServico'] = '0';
   $blocService = atualizar('servicos', $dados, "idServicos = {$_GET['id']}");
+  LogRegister('BlocService', "Usuário {$_SESSION['USUARIO']} Inativou o Serviço id-{$_GET['id']} ", $_SESSION['ID']);
   if ($blocService) {
     header("Location: ?page=listarServicos");
   }
@@ -34,6 +37,8 @@ if (!isset($_SESSION['USUARIO'])) {
   // $blocId = $_GET['blocID'];
   $dados['statusServico'] = '1';
   $blocService = atualizar('servicos', $dados, "idServicos = {$_GET['id']}");
+  LogRegister('UnBlocService', "Usuário {$_SESSION['USUARIO']} Ativou o Serviço id-{$_GET['id']} ", $_SESSION['ID']);
+
   if ($blocService) {
     header("Location: ?page=listarServicos");
   }
